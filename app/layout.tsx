@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Sora } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import SmoothScrollProvider from '@/components/SmoothScrollProvider'
 import Header from '@/components/Header'
@@ -24,6 +25,9 @@ export const metadata: Metadata = {
   authors: [{ name: 'AlphaGrid' }],
   creator: 'AlphaGrid',
   publisher: 'AlphaGrid',
+  icons: {
+    icon: '/favicon.ico',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -64,6 +68,18 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${sora.variable} font-sans antialiased`}>
+        <Script
+          id="ensure-visibility"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Ensure content is visible immediately on page load
+              if (typeof document !== 'undefined') {
+                document.documentElement.style.visibility = 'visible';
+              }
+            `,
+          }}
+        />
         <SmoothScrollProvider>
           <Header />
           <main>{children}</main>

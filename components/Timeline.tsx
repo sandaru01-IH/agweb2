@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Image from 'next/image'
@@ -13,7 +13,8 @@ interface TimelineItem {
   step: string
   title: string
   description: string
-  image?: string
+  image?: string | null
+  graphic?: React.ReactNode
 }
 
 interface TimelineProps {
@@ -313,8 +314,22 @@ export default function Timeline({ items, className = '' }: TimelineProps) {
                   </div>
                 )}
 
-                {/* Placeholder if no image */}
-                {!item.image && (
+                {/* Graphic component if provided */}
+                {item.graphic && !item.image && (
+                  <div
+                    data-timeline-image={index}
+                    className={`${
+                      index % 2 === 0 
+                        ? 'order-1 lg:order-1' 
+                        : 'order-1 lg:order-2'
+                    } relative w-full h-[300px] md:h-[400px] rounded-2xl overflow-hidden shadow-2xl bg-white`}
+                  >
+                    {item.graphic}
+                  </div>
+                )}
+
+                {/* Placeholder if no image or graphic */}
+                {!item.image && !item.graphic && (
                   <div
                     data-timeline-image={index}
                     className={`${

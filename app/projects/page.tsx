@@ -18,8 +18,11 @@ export default function ProjectsPage() {
         <h1 className="text-4xl sm:text-5xl font-display font-bold mb-4">
           All <span className="gradient-text">Projects</span>
         </h1>
-        <p className="text-lg text-dark-600 mb-12 max-w-2xl">
-          Explore our complete portfolio of successful projects
+        <p className="text-lg text-dark-600 mb-2 max-w-2xl">
+          Explore our portfolio of successful projects
+        </p>
+        <p className="text-sm text-dark-500 mb-12 max-w-2xl italic">
+          More projects will be added soon. We have completed 200+ successful projects across various industries.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

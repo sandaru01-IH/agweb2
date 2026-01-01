@@ -127,6 +127,11 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* Ensure content is visible on initial load before animations */
+  .gsap-animate {
+    opacity: 1 !important;
+  }
+
   /* Prevent text clipping - ensure descenders are visible */
   * {
     overflow-wrap: break-word;

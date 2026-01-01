@@ -87,8 +87,13 @@ export default function Stats() {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion || !sectionRef.current) {
       return
+    }
+
+    // Ensure content is visible initially
+    if (sectionRef.current) {
+      gsap.set(sectionRef.current, { opacity: 1, y: 0 })
     }
 
     const ctx = gsap.context(() => {

@@ -30,6 +30,11 @@ export default function Contact() {
       return
     }
 
+    // Ensure section is visible initially
+    if (sectionRef.current) {
+      gsap.set(sectionRef.current, { opacity: 1, y: 0 })
+    }
+
     const ctx = gsap.context(() => {
       gsap.fromTo(
         sectionRef.current,

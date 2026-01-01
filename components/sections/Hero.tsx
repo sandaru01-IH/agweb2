@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { gsap } from 'gsap'
@@ -14,8 +14,15 @@ export default function Hero() {
   const heroRef = useRef<HTMLElement>(null)
   const headlineRef = useRef<HTMLHeadingElement>(null)
   const textRef = useRef<HTMLParagraphElement>(null)
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!isMounted) return
+
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     if (prefersReducedMotion) {
@@ -27,6 +34,8 @@ export default function Hero() {
       if (headlineRef.current) {
         const spans = headlineRef.current.querySelectorAll('span')
         spans.forEach((span, index) => {
+          // Set initial visible state, then animate
+          gsap.set(span, { opacity: 1, clipPath: 'inset(0 0% 0 0)' })
           gsap.fromTo(
             span,
             {
@@ -46,6 +55,8 @@ export default function Hero() {
 
       // Smooth fade in text with stagger
       if (textRef.current) {
+        // Set initial visible state
+        gsap.set(textRef.current, { opacity: 1, y: 0 })
         gsap.fromTo(
           textRef.current,
           { opacity: 0, y: 30 },
@@ -57,7 +68,7 @@ export default function Hero() {
     }, heroRef)
 
     return () => ctx.revert()
-  }, [])
+  }, [isMounted])
 
 
   const handleScrollTo = (id: string) => {
@@ -129,17 +140,6 @@ export default function Hero() {
           </motion.div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <div className="w-6 h-10 border-2 border-dark-600 rounded-full flex justify-center backdrop-blur-sm bg-white/20">
-          <div className="w-1.5 h-4 bg-dark-600 rounded-full mt-2" />
-        </div>
-      </motion.div>
     </section>
   )
 }

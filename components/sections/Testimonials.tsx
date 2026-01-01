@@ -22,6 +22,11 @@ export default function Testimonials() {
       return
     }
 
+    // Ensure section is visible initially
+    if (sectionRef.current) {
+      gsap.set(sectionRef.current, { opacity: 1, y: 0 })
+    }
+
     const ctx = gsap.context(() => {
       gsap.fromTo(
         sectionRef.current,
@@ -112,31 +117,32 @@ export default function Testimonials() {
           </AnimatePresence>
 
           {/* Navigation */}
-          <div className="flex items-center justify-center gap-4 mt-8">
+          <div className="flex items-center justify-center gap-6 mt-8">
             <button
               onClick={prevTestimonial}
-              className="p-2 rounded-full bg-white border border-dark-200 hover:bg-dark-50 transition-colors"
+              className="p-2 rounded-full bg-white border border-dark-200 hover:bg-dark-50 transition-colors shadow-sm hover:shadow-md"
               aria-label="Previous testimonial"
             >
               <ChevronLeft size={20} />
             </button>
-            <div className="flex gap-2">
-              {testimonials.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentIndex(idx)}
-                  className={`h-2 rounded-full transition-all ${
-                    idx === currentIndex
-                      ? 'w-8 bg-dark-900'
-                      : 'w-2 bg-dark-300 hover:bg-dark-400'
-                  }`}
-                  aria-label={`Go to testimonial ${idx + 1}`}
+            
+            {/* Counter and Progress */}
+            <div className="flex flex-col items-center gap-2">
+              <div className="text-sm font-medium text-dark-600">
+                {currentIndex + 1} of {testimonials.length}
+              </div>
+              {/* Progress Bar */}
+              <div className="w-32 h-1 bg-dark-200 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-dark-900 rounded-full transition-all duration-300"
+                  style={{ width: `${((currentIndex + 1) / testimonials.length) * 100}%` }}
                 />
-              ))}
+              </div>
             </div>
+            
             <button
               onClick={nextTestimonial}
-              className="p-2 rounded-full bg-white border border-dark-200 hover:bg-dark-50 transition-colors"
+              className="p-2 rounded-full bg-white border border-dark-200 hover:bg-dark-50 transition-colors shadow-sm hover:shadow-md"
               aria-label="Next testimonial"
             >
               <ChevronRight size={20} />

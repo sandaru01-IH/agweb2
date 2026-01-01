@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
 interface ScrollLinesBgProps {
@@ -8,11 +8,18 @@ interface ScrollLinesBgProps {
 }
 
 export default function ScrollLinesBg({ sectionRef }: ScrollLinesBgProps) {
-  const [isMounted, setIsMounted] = useState(false)
-
   useEffect(() => {
-    setIsMounted(true)
-  }, [])
+    // Ensure the container has a non-static position
+    // This runs after initial render to ensure position is set correctly
+    if (sectionRef.current) {
+      const element = sectionRef.current
+      const computedStyle = window.getComputedStyle(element)
+      // Force relative positioning if not already set
+      if (computedStyle.position === 'static') {
+        element.style.position = 'relative'
+      }
+    }
+  }, [sectionRef])
 
   // Check for reduced motion preference
   const prefersReducedMotion =
@@ -20,6 +27,7 @@ export default function ScrollLinesBg({ sectionRef }: ScrollLinesBgProps) {
     window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   // Track scroll progress for this specific section
+  // The warning about position is informational - the container already has position: relative
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start'],

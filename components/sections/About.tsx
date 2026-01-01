@@ -17,28 +17,28 @@ const founders = [
   {
     name: 'Samith Madushanka',
     role: 'Co-Founder',
-    bio: 'Focused on turning complex data into outcomes clients can measure. Delivering measurable results through data analytics, AI solutions, and high-quality product execution.',
-    quote: 'We don\'t just deliver dashboards — we deliver decisions.',
+    bio: 'Samith Madushanka helps shape AlphaGrid by turning ideas into meaningful, real-world solutions. He focuses on building simple, useful products that create clear value and support confident decisions.',
+    quote: '"We Creating clarity through action."',
     highlights: [
       'Led 630+ project deliveries across industries',
       'Data analytics + AI solution strategy',
       'Client-first execution and quality control',
     ],
     image: '/founders/samith-madushanka.jpg',
-    linkedin: '#', // Replace with actual LinkedIn URL
+    linkedin: 'https://www.linkedin.com/in/samith-madusanka?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BGRcI9tSdR5iAPQBlOd1ENg%3D%3D', // Replace with actual LinkedIn URL
   },
   {
     name: 'Sandaruwan Sankalpa',
     role: 'Co-Founder',
-    bio: 'Engineering should feel simple to users — even when it\'s complex underneath. Leads solution architecture and scalable systems for premium user experiences.',
-    quote: 'Engineering should feel simple to users — even when it\'s complex underneath.',
+    bio: 'Sandaruwan Sankalpa focuses on building systems that feel simple, smooth, and reliable for real users. He shapes how AlphaGrid’s products are designed and built, making sure every solution is easy to use, well-structured, and ready to grow.',
+    quote: '"Making complexity feel simple."',
     highlights: [
       'Solution architecture & scalable systems',
-      'Full-stack product engineering',
+      'Data analytics + AI solution strategy',
       'Performance, security, and UX-driven builds',
     ],
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&h=800&fit=crop&crop=faces',
-    linkedin: '#', // Replace with actual LinkedIn URL
+    image: '/founders/sandaruwansankalpa.png',
+    linkedin: 'www.linkedin.com/in/wsssilva', // Replace with actual LinkedIn URL
   },
 ]
 
@@ -176,30 +176,141 @@ const whyAlphaGrid = [
   },
 ]
 
+// Process Step Graphics Component
+function ProcessGraphic({ step }: { step: string }) {
+  const graphics = {
+    '01': (
+      <svg viewBox="0 0 400 300" className="w-full h-full">
+        <defs>
+          <linearGradient id={`grad-discovery-${step}`} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#1e293b" stopOpacity="0.1" />
+            <stop offset="100%" stopColor="#0f172a" stopOpacity="0.2" />
+          </linearGradient>
+        </defs>
+        <rect width="400" height="300" fill={`url(#grad-discovery-${step})`} rx="20" />
+        {/* Magnifying Glass - Discovery */}
+        <g transform="translate(150, 80)">
+          <circle cx="0" cy="0" r="60" fill="none" stroke="#0f172a" strokeWidth="8" opacity="0.3" />
+          <circle cx="0" cy="0" r="40" fill="none" stroke="#0f172a" strokeWidth="6" />
+          <line x1="50" y1="50" x2="80" y2="80" stroke="#0f172a" strokeWidth="6" strokeLinecap="round" />
+          <circle cx="0" cy="0" r="15" fill="#0f172a" opacity="0.2" />
+        </g>
+        {/* Search dots */}
+        <circle cx="100" cy="180" r="4" fill="#0f172a" opacity="0.4" />
+        <circle cx="130" cy="200" r="4" fill="#0f172a" opacity="0.4" />
+        <circle cx="300" cy="200" r="4" fill="#0f172a" opacity="0.4" />
+      </svg>
+    ),
+    '02': (
+      <svg viewBox="0 0 400 300" className="w-full h-full">
+        <defs>
+          <linearGradient id={`grad-strategy-${step}`} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#1e293b" stopOpacity="0.1" />
+            <stop offset="100%" stopColor="#0f172a" stopOpacity="0.2" />
+          </linearGradient>
+        </defs>
+        <rect width="400" height="300" fill={`url(#grad-strategy-${step})`} rx="20" />
+        {/* Strategy Chart/Blueprint */}
+        <g transform="translate(100, 60)">
+          <rect x="0" y="0" width="200" height="180" fill="none" stroke="#0f172a" strokeWidth="3" strokeDasharray="5,5" opacity="0.3" />
+          {/* Chart bars */}
+          <rect x="30" y="140" width="30" height="40" fill="#0f172a" opacity="0.6" />
+          <rect x="70" y="100" width="30" height="80" fill="#0f172a" opacity="0.7" />
+          <rect x="110" y="80" width="30" height="100" fill="#0f172a" opacity="0.8" />
+          <rect x="150" y="60" width="30" height="120" fill="#0f172a" />
+          {/* Connection lines */}
+          <line x1="45" y1="120" x2="75" y2="100" stroke="#0f172a" strokeWidth="2" opacity="0.4" />
+          <line x1="85" y1="80" x2="125" y2="60" stroke="#0f172a" strokeWidth="2" opacity="0.4" />
+        </g>
+      </svg>
+    ),
+    '03': (
+      <svg viewBox="0 0 400 300" className="w-full h-full">
+        <defs>
+          <linearGradient id={`grad-development-${step}`} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#1e293b" stopOpacity="0.1" />
+            <stop offset="100%" stopColor="#0f172a" stopOpacity="0.2" />
+          </linearGradient>
+        </defs>
+        <rect width="400" height="300" fill={`url(#grad-development-${step})`} rx="20" />
+        {/* Code brackets - Development */}
+        <g transform="translate(120, 80)" fill="none" stroke="#0f172a" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round">
+          {/* Left bracket */}
+          <path d="M 0 20 L 0 0 L 40 0" />
+          <path d="M 0 60 L 0 80 L 40 80" />
+          {/* Code lines */}
+          <line x1="80" y1="20" x2="180" y2="20" strokeWidth="4" opacity="0.6" />
+          <line x1="80" y1="40" x2="160" y2="40" strokeWidth="4" opacity="0.6" />
+          <line x1="80" y1="60" x2="200" y2="60" strokeWidth="4" opacity="0.6" />
+          {/* Right bracket */}
+          <path d="M 240 0 L 280 0 L 280 20" />
+          <path d="M 240 80 L 280 80 L 280 60" />
+        </g>
+        {/* Gear icon */}
+        <g transform="translate(320, 200)">
+          <circle cx="0" cy="0" r="30" fill="none" stroke="#0f172a" strokeWidth="4" opacity="0.3" />
+          <path d="M -20 -20 L -10 -10 M 20 -20 L 10 -10 M 20 20 L 10 10 M -20 20 L -10 10" stroke="#0f172a" strokeWidth="3" opacity="0.4" />
+        </g>
+      </svg>
+    ),
+    '04': (
+      <svg viewBox="0 0 400 300" className="w-full h-full">
+        <defs>
+          <linearGradient id={`grad-launch-${step}`} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#1e293b" stopOpacity="0.1" />
+            <stop offset="100%" stopColor="#0f172a" stopOpacity="0.2" />
+          </linearGradient>
+        </defs>
+        <rect width="400" height="300" fill={`url(#grad-launch-${step})`} rx="20" />
+        {/* Rocket - Launch */}
+        <g transform="translate(150, 100)">
+          <path d="M 50 100 L 50 40 L 30 40 L 50 20 L 70 40 L 50 40" fill="#0f172a" />
+          <rect x="40" y="40" width="20" height="60" fill="#0f172a" />
+          <circle cx="50" cy="60" r="5" fill="white" opacity="0.8" />
+          {/* Rocket flames */}
+          <path d="M 40 100 L 35 120 L 50 110 Z" fill="#0f172a" opacity="0.6" />
+          <path d="M 60 100 L 65 120 L 50 110 Z" fill="#0f172a" opacity="0.6" />
+        </g>
+        {/* Checkmark - Support */}
+        <g transform="translate(280, 180)">
+          <circle cx="0" cy="0" r="25" fill="none" stroke="#0f172a" strokeWidth="4" />
+          <path d="M -10 0 L -5 5 L 10 -5" stroke="#0f172a" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        </g>
+        {/* Success stars */}
+        <circle cx="100" cy="80" r="2" fill="#0f172a" opacity="0.4" />
+        <circle cx="300" cy="100" r="2" fill="#0f172a" opacity="0.4" />
+        <circle cx="320" cy="60" r="2" fill="#0f172a" opacity="0.4" />
+      </svg>
+    ),
+  }
+
+  return graphics[step as keyof typeof graphics] || null
+}
+
 const processSteps = [
   {
     step: '01',
     title: 'Discovery',
     description: 'We dive deep into your business challenges and goals to understand what success looks like.',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop&q=80',
+    image: null, // Will use graphic component instead
   },
   {
     step: '02',
     title: 'Strategy',
     description: 'Our team designs a comprehensive solution tailored to your specific needs and constraints.',
-    image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=600&fit=crop&q=80',
+    image: null,
   },
   {
     step: '03',
     title: 'Development',
     description: 'We build with precision, maintaining transparency and collaboration throughout the process.',
-    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop&q=80',
+    image: null,
   },
   {
     step: '04',
     title: 'Launch & Support',
     description: 'We ensure smooth deployment and provide ongoing support to maximize your investment.',
-    image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop&q=80',
+    image: null,
   },
 ]
 
@@ -212,6 +323,14 @@ export default function About() {
 
     if (prefersReducedMotion) {
       return
+    }
+
+    // Ensure items are visible initially
+    const items = sectionRef.current?.querySelectorAll('.about-item')
+    if (items) {
+      items.forEach((item) => {
+        gsap.set(item, { opacity: 1, y: 0 })
+      })
     }
 
     const ctx = gsap.context(() => {
@@ -311,7 +430,6 @@ export default function About() {
         <div 
           ref={whyChooseRef}
           className="mb-20 relative overflow-hidden py-16 md:py-20"
-          style={{ position: 'relative' }}
         >
           {/* Scroll-reactive moving lines background */}
           <ScrollLinesBg sectionRef={whyChooseRef} />
@@ -362,6 +480,7 @@ export default function About() {
               title: step.title,
               description: step.description,
               image: step.image,
+              graphic: <ProcessGraphic step={step.step} />,
             }))}
             className="min-h-[600px] md:min-h-[800px]"
           />

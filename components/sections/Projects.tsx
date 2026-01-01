@@ -25,39 +25,49 @@ export default function Projects() {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion || !sectionRef.current) {
+      return
+    }
+
+    // Wait for DOM to be ready and check if project cards exist
+    const projectCards = sectionRef.current.querySelectorAll('.project-card')
+    
+    if (projectCards.length === 0) {
       return
     }
 
     const ctx = gsap.context(() => {
-      // Enhanced project card animations
-      gsap.fromTo(
-        '.project-card',
-        {
-          opacity: 0,
-          y: 80,
-          scale: 0.95,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1,
-          ease: 'power3.out',
-          stagger: 0.15,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 75%',
-            end: 'top 30%',
-            toggleActions: 'play none none reverse',
-            scrub: false,
+      // Enhanced project card animations - only if cards exist
+      const cards = sectionRef.current?.querySelectorAll('.project-card')
+      if (cards && cards.length > 0) {
+        gsap.fromTo(
+          cards,
+          {
+            opacity: 0,
+            y: 80,
+            scale: 0.95,
           },
-        }
-      )
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1,
+            ease: 'power3.out',
+            stagger: 0.15,
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 75%',
+              end: 'top 30%',
+              toggleActions: 'play none none reverse',
+              scrub: false,
+            },
+          }
+        )
+      }
     }, sectionRef)
 
     return () => ctx.revert()
-  }, [selectedCategory])
+  }, [selectedCategory, filteredProjects.length])
 
   return (
     <section id="projects" ref={sectionRef} className="section-padding bg-gradient-to-b from-dark-50 to-white">
@@ -72,8 +82,11 @@ export default function Projects() {
           <h2 className="text-4xl sm:text-5xl font-heading font-bold mb-4 text-dark-900" style={{ letterSpacing: '-0.02em', lineHeight: '1.15', paddingBottom: '0.1em' }}>
             Featured <span className="text-dark-900">Projects</span>
           </h2>
-          <p className="text-lg text-dark-600 max-w-2xl mx-auto" style={{ lineHeight: '1.6' }}>
+          <p className="text-lg text-dark-600 max-w-2xl mx-auto mb-2" style={{ lineHeight: '1.6' }}>
             Showcasing our expertise through successful client engagements
+          </p>
+          <p className="text-sm text-dark-500 max-w-2xl mx-auto italic" style={{ lineHeight: '1.6' }}>
+            More projects will be added soon. We have completed 200+ successful projects across various industries.
           </p>
         </motion.div>
 
