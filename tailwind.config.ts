@@ -9,43 +9,51 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Black and white palette
-        primary: {
-          50: '#fafafa',
-          100: '#f5f5f5',
-          200: '#e5e5e5',
-          300: '#d4d4d4',
-          400: '#a3a3a3',
+        yellow: {
+          DEFAULT: '#F5C518',
+          50: '#FFFDE7',
+          100: '#FFF9C4',
+          200: '#FFF59D',
+          300: '#FFF176',
+          400: '#FFEE58',
+          500: '#F5C518',
+          600: '#E5A800',
+          700: '#CC9400',
+          800: '#A67800',
+          900: '#7A5800',
+        },
+        ink: {
+          DEFAULT: '#0A0A0A',
+          50: '#F5F5F5',
+          100: '#EBEBEB',
+          200: '#D6D6D6',
+          300: '#B8B8B8',
+          400: '#999999',
           500: '#737373',
           600: '#525252',
-          700: '#404040',
-          800: '#262626',
-          900: '#171717',
-          950: '#0a0a0a',
+          700: '#3D3D3D',
+          800: '#1F1F1F',
+          900: '#0F0F0F',
+          950: '#0A0A0A',
         },
-        dark: {
-          50: '#fafafa',
-          100: '#f5f5f5',
-          200: '#e5e5e5',
-          300: '#d4d4d4',
-          400: '#a3a3a3',
-          500: '#737373',
-          600: '#525252',
-          700: '#404040',
-          800: '#262626',
-          900: '#171717',
-          950: '#0a0a0a',
-        },
+        cream: '#FAFAFA',
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-sora)', 'var(--font-inter)', 'system-ui', 'sans-serif'],
-        heading: ['var(--font-sora)', 'var(--font-inter)', 'system-ui', 'sans-serif'],
-        body: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-bricolage)', 'var(--font-dm-sans)', 'system-ui', 'sans-serif'],
+        heading: ['var(--font-bricolage)', 'var(--font-dm-sans)', 'system-ui', 'sans-serif'],
+      },
+      fontSize: {
+        '8xl': ['6rem', { lineHeight: '1.0', letterSpacing: '-0.03em' }],
+        '9xl': ['8rem', { lineHeight: '0.95', letterSpacing: '-0.04em' }],
+        '10xl': ['10rem', { lineHeight: '0.9', letterSpacing: '-0.04em' }],
       },
       animation: {
-        'fade-in': 'fadeIn 0.6s ease-out',
-        'slide-up': 'slideUp 0.6s ease-out',
+        'fade-in': 'fadeIn 0.8s ease-out forwards',
+        'slide-up': 'slideUp 0.7s ease-out forwards',
+        'marquee': 'marquee 40s linear infinite',
+        'marquee-reverse': 'marqueeReverse 40s linear infinite',
+        'spin-slow': 'spin 20s linear infinite',
       },
       keyframes: {
         fadeIn: {
@@ -53,13 +61,21 @@ const config: Config = {
           '100%': { opacity: '1' },
         },
         slideUp: {
-          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '0%': { transform: 'translateY(50px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        marqueeReverse: {
+          '0%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(0%)' },
         },
       },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'grid-pattern': "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
+        'grid-pattern-light': "linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px)",
         'noise': "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E\")",
       },
     },
@@ -67,5 +83,3 @@ const config: Config = {
   plugins: [],
 }
 export default config
-
-

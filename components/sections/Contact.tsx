@@ -1,258 +1,266 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
-import { Mail, Copy, Check, Send } from 'lucide-react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger)
-}
+import { useState, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { Mail, Send, ArrowRight, Copy, Check } from 'lucide-react'
 
 export default function Contact() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-60px' })
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     company: '',
+    interest: '',
     message: '',
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const [copied, setCopied] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
-  const email = 'alphagrid.official@gmail.com'
 
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const email = 'hello@alphagridglobal.com'
 
-    if (prefersReducedMotion) {
-      return
-    }
-
-    // Ensure section is visible initially
-    if (sectionRef.current) {
-      gsap.set(sectionRef.current, { opacity: 1, y: 0 })
-    }
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        sectionRef.current,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none reverse',
-          },
-        }
-      )
-    }, sectionRef)
-
-    return () => ctx.revert()
-  }, [])
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    // Simulate form submission
-    // In production, replace this with actual Formspree or Resend integration
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-    setFormData({ name: '', email: '', company: '', message: '' })
-
-    setTimeout(() => {
-      setIsSubmitted(false)
-    }, 5000)
-  }
-
-  const handleCopyEmail = async () => {
+  const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(email)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
-    } catch (err) {
-      console.error('Failed to copy email:', err)
+    } catch {
+      // fallback silently
     }
   }
 
-  return (
-    <section id="contact" ref={sectionRef} className="section-padding bg-white">
-      <div className="container-custom">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-        >
-          <h2 className="text-4xl sm:text-5xl font-heading font-bold mb-4 text-dark-900" style={{ letterSpacing: '-0.02em', lineHeight: '1.15', paddingBottom: '0.1em' }}>
-            Get In <span className="text-dark-900">Touch</span>
-          </h2>
-          <p className="text-lg text-dark-600 max-w-2xl mx-auto" style={{ lineHeight: '1.6' }}>
-            Ready to transform your data into intelligence? Let&#39;s start a conversation.
-          </p>
-        </motion.div>
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
 
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    await new Promise((r) => setTimeout(r, 1200))
+    setIsSubmitting(false)
+    setSubmitted(true)
+  }
+
+  return (
+    <section id="contact" className="relative bg-cream overflow-hidden">
+      <div className="absolute inset-0 bg-grid-light pointer-events-none" />
+
+      <div className="container-custom section-py relative z-10">
+        {/* Header */}
+        <div ref={ref} className="mb-14">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="mb-4"
+          >
+            <span className="tag-outline-light">Let&apos;s Talk</span>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="display-lg text-ink-950 max-w-2xl"
+          >
+            Ready to build{' '}
+            <span style={{ color: '#F5C518' }}>something</span>{' '}
+            remarkable?
+          </motion.h2>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+          {/* Left — Info panel */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="lg:col-span-2"
+          >
+            <p className="text-ink-500 leading-relaxed mb-8" style={{ fontSize: '1.05rem' }}>
+              Whether you want to work with AlphaDATA on a data project,
+              partner with AlphaTALK for content, or explore opportunities
+              within the AlphaGRID ecosystem — we want to hear from you.
+            </p>
+
+            {/* Email */}
+            <div className="mb-8">
+              <p className="label-sm text-ink-300 mb-3">Direct Email</p>
+              <button
+                onClick={handleCopy}
+                className="group flex items-center gap-3 w-full p-4 rounded-lg border border-ink-100 bg-white hover:border-yellow-500/40 transition-all duration-300"
+              >
+                <Mail size={16} className="text-ink-400 group-hover:text-yellow-600 transition-colors" />
+                <span
+                  className="text-ink-700 font-medium flex-1 text-left text-sm"
+                  style={{ fontFamily: 'var(--font-dm-sans)', letterSpacing: '0.01em' }}
+                >
+                  {email}
+                </span>
+                {copied ? (
+                  <Check size={14} className="text-green-600" />
+                ) : (
+                  <Copy size={14} className="text-ink-300 group-hover:text-ink-600 transition-colors" />
+                )}
+              </button>
+            </div>
+
+            {/* What we can help with */}
             <div>
-              <h3 className="text-2xl font-heading font-semibold mb-6" style={{ letterSpacing: '-0.01em' }}>Send us a message</h3>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-dark-700 mb-2">
-                    Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 border border-dark-200 rounded-lg focus:ring-2 focus:ring-dark-900 focus:border-transparent transition-all"
-                    placeholder="Your name"
-                  />
+              <p className="label-sm text-ink-300 mb-4">Areas of Collaboration</p>
+              <div className="space-y-3">
+                {[
+                  { label: 'AlphaDATA', desc: 'Spatial, GIS, and data science projects' },
+                  { label: 'AlphaTALK', desc: 'Content creation and brand strategy' },
+                  { label: 'Partnerships', desc: 'Joining the AlphaGRID ecosystem' },
+                  { label: 'Investing', desc: 'Supporting our growth story' },
+                ].map((item) => (
+                  <div key={item.label} className="flex items-start gap-3">
+                    <div
+                      className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0"
+                      style={{ backgroundColor: '#F5C518' }}
+                    />
+                    <div>
+                      <span className="text-ink-800 font-semibold text-sm">{item.label}</span>
+                      <span className="text-ink-400 text-sm"> — {item.desc}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right — Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="lg:col-span-3"
+          >
+            {submitted ? (
+              <div className="h-full flex items-center justify-center py-16">
+                <div className="text-center">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: 'spring', stiffness: 200 }}
+                    className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+                    style={{ backgroundColor: 'rgba(245,197,24,0.15)' }}
+                  >
+                    <Check size={28} style={{ color: '#F5C518' }} />
+                  </motion.div>
+                  <h3
+                    className="text-ink-900 mb-3"
+                    style={{
+                      fontFamily: 'var(--font-bricolage), system-ui, sans-serif',
+                      fontSize: '1.5rem',
+                      fontWeight: 700,
+                    }}
+                  >
+                    Message Received
+                  </h3>
+                  <p className="text-ink-400 text-sm">
+                    We&apos;ll get back to you within 24 hours.
+                  </p>
                 </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-dark-700 mb-2">
-                    Email *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 border border-dark-200 rounded-lg focus:ring-2 focus:ring-dark-900 focus:border-transparent transition-all"
-                    placeholder="your.email@example.com"
-                  />
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className="label-sm text-ink-400 block mb-2">Your Name</label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      placeholder="John Doe"
+                      className="w-full px-4 py-3 rounded-lg border border-ink-100 bg-white text-ink-900 text-sm placeholder:text-ink-300 focus:outline-none focus:border-yellow-500 transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="label-sm text-ink-400 block mb-2">Email Address</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      placeholder="you@example.com"
+                      className="w-full px-4 py-3 rounded-lg border border-ink-100 bg-white text-ink-900 text-sm placeholder:text-ink-300 focus:outline-none focus:border-yellow-500 transition-colors"
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label htmlFor="company" className="block text-sm font-medium text-dark-700 mb-2">
-                    Company
-                  </label>
-                  <input
-                    type="text"
-                    id="company"
-                    value={formData.company}
-                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="w-full px-4 py-3 border border-dark-200 rounded-lg focus:ring-2 focus:ring-dark-900 focus:border-transparent transition-all"
-                    placeholder="Your company"
-                  />
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className="label-sm text-ink-400 block mb-2">Company / Organization</label>
+                    <input
+                      type="text"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleChange}
+                      placeholder="Your company"
+                      className="w-full px-4 py-3 rounded-lg border border-ink-100 bg-white text-ink-900 text-sm placeholder:text-ink-300 focus:outline-none focus:border-yellow-500 transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="label-sm text-ink-400 block mb-2">Area of Interest</label>
+                    <select
+                      name="interest"
+                      value={formData.interest}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-lg border border-ink-100 bg-white text-ink-900 text-sm focus:outline-none focus:border-yellow-500 transition-colors appearance-none"
+                    >
+                      <option value="">Select one...</option>
+                      <option value="alphadata">AlphaDATA — Data Solutions</option>
+                      <option value="alphatalk">AlphaTALK — Content Creation</option>
+                      <option value="partnership">Partnership</option>
+                      <option value="investment">Investment / Collaboration</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
                 </div>
+
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-dark-700 mb-2">
-                    Message *
-                  </label>
+                  <label className="label-sm text-ink-400 block mb-2">Your Message</label>
                   <textarea
-                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     required
                     rows={5}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-4 py-3 border border-dark-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all resize-none"
-                    placeholder="Tell us about your project..."
+                    placeholder="Tell us what you have in mind..."
+                    className="w-full px-4 py-3 rounded-lg border border-ink-100 bg-white text-ink-900 text-sm placeholder:text-ink-300 focus:outline-none focus:border-yellow-500 transition-colors resize-none"
                   />
                 </div>
+
                 <button
                   type="submit"
-                  disabled={isSubmitting || isSubmitted}
-                  className="w-full px-6 py-4 bg-dark-900 text-white rounded-lg font-semibold hover:bg-dark-800 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={isSubmitting}
+                  className="btn-primary w-full justify-center"
                 >
                   {isSubmitting ? (
                     <>
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <div className="w-4 h-4 border-2 border-ink-950/30 border-t-ink-950 rounded-full animate-spin" />
                       Sending...
-                    </>
-                  ) : isSubmitted ? (
-                    <>
-                      <Check size={20} />
-                      Message Sent!
                     </>
                   ) : (
                     <>
-                      <Send size={20} />
                       Send Message
+                      <Send size={16} />
                     </>
                   )}
                 </button>
-                {isSubmitted && (
-                  <p className="text-sm text-green-600 text-center">
-                    Thank you! We&#39;ll get back to you soon.
-                  </p>
-                )}
               </form>
-            </div>
-
-            {/* Contact Info */}
-            <div>
-              <h3 className="text-2xl font-heading font-semibold mb-6" style={{ letterSpacing: '-0.01em' }}>Contact Information</h3>
-              <div className="space-y-6">
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <Mail className="text-dark-900" size={24} />
-                    <h4 className="text-lg font-semibold text-dark-900">Email</h4>
-                  </div>
-                  <div className="flex items-center gap-3 p-4 bg-dark-50 rounded-lg">
-                    <a
-                      href={`mailto:${email}`}
-                      className="flex-1 text-dark-700 hover:text-dark-900 transition-colors"
-                    >
-                      {email}
-                    </a>
-                    <button
-                      onClick={handleCopyEmail}
-                      className="p-2 hover:bg-white rounded-lg transition-colors"
-                      aria-label="Copy email"
-                    >
-                      {copied ? (
-                        <Check className="text-green-600" size={20} />
-                      ) : (
-                        <Copy className="text-dark-600" size={20} />
-                      )}
-                    </button>
-                  </div>
-                  {copied && (
-                    <p className="text-sm text-green-600 mt-2">Email copied to clipboard!</p>
-                  )}
-                </div>
-
-                <div className="pt-8 border-t border-dark-200">
-                  <h4 className="text-lg font-semibold text-dark-900 mb-4">Why work with us?</h4>
-                  <ul className="space-y-3 text-dark-600">
-                    <li className="flex items-start gap-2">
-                      <span className="text-dark-900 mt-1">✓</span>
-                      <span>Free consultation to understand your needs</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-dark-900 mt-1">✓</span>
-                      <span>Transparent pricing with no hidden fees</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-dark-900 mt-1">✓</span>
-                      <span>Dedicated project manager for every engagement</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-dark-900 mt-1">✓</span>
-                      <span>Ongoing support and maintenance available</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
+            )}
+          </motion.div>
         </div>
       </div>
     </section>
   )
 }
-
-

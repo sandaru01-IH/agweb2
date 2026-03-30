@@ -1,23 +1,21 @@
 import Hero from '@/components/sections/Hero'
-import Stats from '@/components/sections/Stats'
-import Services from '@/components/sections/Services'
-import Projects from '@/components/sections/Projects'
-import Testimonials from '@/components/sections/Testimonials'
-import About from '@/components/sections/About'
+import Ecosystem from '@/components/sections/Ecosystem'
+import AlphaData from '@/components/sections/AlphaData'
+import AlphaTalk from '@/components/sections/AlphaTalk'
+import Founders from '@/components/sections/Founders'
+import Vision from '@/components/sections/Vision'
 import Contact from '@/components/sections/Contact'
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <Stats />
-      <Services />
-      <Projects />
-      <Testimonials />
-      <About />
+      <Ecosystem />
+      <AlphaData />
+      <AlphaTalk />
+      <Founders />
+      <Vision />
       <Contact />
     </>
   )
 }
-
-

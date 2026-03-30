@@ -1,45 +1,47 @@
 import type { Metadata } from 'next'
-import { Inter, Sora } from 'next/font/google'
+import { Bricolage_Grotesque, DM_Sans } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 import SmoothScrollProvider from '@/components/SmoothScrollProvider'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
-const inter = Inter({
+const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-bricolage',
   display: 'swap',
+  weight: ['300', '400', '500', '600', '700', '800'],
 })
 
-const sora = Sora({
+const dmSans = DM_Sans({
   subsets: ['latin'],
-  variable: '--font-sora',
+  variable: '--font-dm-sans',
   display: 'swap',
+  weight: ['300', '400', '500', '600', '700'],
 })
 
 export const metadata: Metadata = {
-  title: 'AlphaGrid | Data Analytics & AI Solutions',
-  description: 'Premium data analytics, visualization, engineering, and AI solutions. Transforming businesses with cutting-edge technology and expert insights.',
-  keywords: ['data analytics', 'data visualization', 'data engineering', 'AI solutions', 'machine learning', 'software development', 'web applications'],
-  authors: [{ name: 'AlphaGrid' }],
-  creator: 'AlphaGrid',
-  publisher: 'AlphaGrid',
+  title: 'AlphaGRID | One Group. Infinite Ambition.',
+  description: 'AlphaGRID is a multi-brand holding company built around bold ideas — from data intelligence and spatial analytics to creative content. Home of AlphaDATA and AlphaTALK.',
+  keywords: ['AlphaGRID', 'AlphaDATA', 'AlphaTALK', 'data science', 'GIS', 'spatial analysis', 'content creation', 'Sri Lanka', 'data analytics'],
+  authors: [{ name: 'AlphaGRID' }],
+  creator: 'AlphaGRID',
+  publisher: 'AlphaGRID',
   icons: {
     icon: '/favicon.ico',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://alphagrid.com',
-    title: 'AlphaGrid | Data Analytics & AI Solutions',
-    description: 'Premium data analytics, visualization, engineering, and AI solutions.',
-    siteName: 'AlphaGrid',
+    url: 'https://alphagridglobal.com',
+    title: 'AlphaGRID | One Group. Infinite Ambition.',
+    description: 'AlphaGRID is a multi-brand holding company built around bold ideas.',
+    siteName: 'AlphaGRID',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AlphaGrid | Data Analytics & AI Solutions',
-    description: 'Premium data analytics, visualization, engineering, and AI solutions.',
+    title: 'AlphaGRID | One Group. Infinite Ambition.',
+    description: 'AlphaGRID is a multi-brand holding company built around bold ideas.',
   },
   robots: {
     index: true,
@@ -67,13 +69,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${sora.variable} font-sans antialiased`}>
+      <body className={`${bricolage.variable} ${dmSans.variable} font-sans antialiased`}>
         <Script
           id="ensure-visibility"
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-              // Ensure content is visible immediately on page load
               if (typeof document !== 'undefined') {
                 document.documentElement.style.visibility = 'visible';
               }
@@ -89,5 +90,3 @@ export default function RootLayout({
     </html>
   )
 }
-
-
