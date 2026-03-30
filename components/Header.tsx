@@ -67,16 +67,27 @@ export default function Header() {
       }`}
     >
       <nav className="container-custom">
-        <div className="flex items-center justify-between py-5">
+        <div className="flex items-center justify-between py-4 md:py-5">
           {/* Logo */}
           <button
             onClick={() => handleNavClick('#hero')}
-            className="flex items-center gap-2 group"
+            className="flex items-center gap-2.5 group"
           >
-            <div className="w-8 h-8 bg-yellow-500 flex items-center justify-center rounded-sm">
-              <span className="font-display font-black text-ink-950 text-lg leading-none" style={{ fontStyle: 'italic' }}>α</span>
+            <div
+              className="flex items-center justify-center rounded-sm bg-yellow-500 flex-shrink-0"
+              style={{ width: '32px', height: '32px' }}
+            >
+              <span
+                className="font-display font-black text-ink-950 leading-none"
+                style={{ fontSize: '1.05rem', fontStyle: 'italic' }}
+              >
+                α
+              </span>
             </div>
-            <span className="font-display font-bold text-white text-xl tracking-tight">
+            <span
+              className="font-display font-bold text-white tracking-tight"
+              style={{ fontSize: 'clamp(1rem, 4vw, 1.2rem)', letterSpacing: '-0.02em' }}
+            >
               Alpha<span className="text-yellow-500">GRID</span>
             </span>
           </button>
@@ -110,18 +121,30 @@ export default function Header() {
 
           {/* CTA + Mobile Toggle */}
           <div className="flex items-center gap-3">
-            <button
-              onClick={() => handleNavClick('#contact')}
-              className="hidden md:flex btn-primary text-sm py-2.5 px-5"
-            >
-              Get in Touch
-            </button>
+            {/* Desktop CTA — wrapper div controls visibility so btn-primary display doesn't bleed through */}
+            <div className="hidden md:block">
+              <button
+                onClick={() => handleNavClick('#contact')}
+                className="btn-primary text-sm py-2.5 px-5"
+              >
+                Get in Touch
+              </button>
+            </div>
+
+            {/* Mobile hamburger */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden w-9 h-9 flex items-center justify-center text-white/70 hover:text-white transition-colors"
+              className="md:hidden relative flex items-center justify-center rounded-sm transition-colors"
+              style={{
+                width: '38px',
+                height: '38px',
+                border: '1px solid rgba(255,255,255,0.12)',
+                color: isMobileMenuOpen ? '#F5C518' : 'rgba(255,255,255,0.7)',
+                backgroundColor: isMobileMenuOpen ? 'rgba(245,197,24,0.08)' : 'transparent',
+              }}
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {isMobileMenuOpen ? <X size={17} /> : <Menu size={17} />}
             </button>
           </div>
         </div>
@@ -137,26 +160,46 @@ export default function Header() {
             transition={{ duration: 0.2 }}
             className="md:hidden bg-ink-950/95 backdrop-blur-xl border-b border-white/[0.06]"
           >
-            <div className="container-custom py-6 flex flex-col gap-1">
-              {navItems.map((item) => (
+            <div className="container-custom pt-4 pb-6 flex flex-col">
+              {navItems.map((item, idx) => {
+                const isActive = activeSection === item.href.replace('#', '')
+                return (
+                  <button
+                    key={item.name}
+                    onClick={() => handleNavClick(item.href)}
+                    className="flex items-center justify-between text-left py-3.5 transition-colors"
+                    style={{
+                      borderBottom: idx < navItems.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none',
+                      color: isActive ? '#F5C518' : 'rgba(255,255,255,0.55)',
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-dm-sans), system-ui, sans-serif',
+                        fontSize: '0.95rem',
+                        fontWeight: isActive ? 600 : 400,
+                        letterSpacing: '0.01em',
+                      }}
+                    >
+                      {item.name}
+                    </span>
+                    {isActive && (
+                      <div className="w-1.5 h-1.5 rounded-full bg-yellow-500 flex-shrink-0" />
+                    )}
+                  </button>
+                )
+              })}
+
+              {/* Mobile CTA */}
+              <div className="mt-5">
                 <button
-                  key={item.name}
-                  onClick={() => handleNavClick(item.href)}
-                  className={`text-left px-0 py-3 text-base font-medium border-b border-white/[0.06] transition-colors ${
-                    activeSection === item.href.replace('#', '')
-                      ? 'text-yellow-500'
-                      : 'text-white/60 hover:text-white'
-                  }`}
+                  onClick={() => handleNavClick('#contact')}
+                  className="btn-primary w-full justify-center"
+                  style={{ borderRadius: '6px' }}
                 >
-                  {item.name}
+                  Get in Touch
                 </button>
-              ))}
-              <button
-                onClick={() => handleNavClick('#contact')}
-                className="btn-primary mt-4 justify-center"
-              >
-                Get in Touch
-              </button>
+              </div>
             </div>
           </motion.div>
         )}
