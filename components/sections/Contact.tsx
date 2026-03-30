@@ -83,7 +83,7 @@ export default function Contact() {
             <p className="text-ink-500 leading-relaxed mb-8" style={{ fontSize: '1.05rem' }}>
               Whether you want to work with AlphaDATA on a data project,
               partner with AlphaTALK for content, or explore opportunities
-              within the AlphaGRID ecosystem — we want to hear from you.
+              within the AlphaGRID ecosystem. We want to hear from you.
             </p>
 
             {/* Email */}
@@ -142,7 +142,7 @@ export default function Contact() {
                     />
                     <div>
                       <span className="text-ink-800 font-semibold text-sm">{item.label}</span>
-                      <span className="text-ink-400 text-sm"> — {item.desc}</span>
+                      <span className="text-ink-400 text-sm"> · {item.desc}</span>
                     </div>
                   </div>
                 ))}
@@ -234,8 +234,8 @@ export default function Contact() {
                       className="w-full px-4 py-3 rounded-lg border border-ink-100 bg-white text-ink-900 text-sm focus:outline-none focus:border-yellow-500 transition-colors appearance-none"
                     >
                       <option value="">Select one...</option>
-                      <option value="alphadata">AlphaDATA — Data Solutions</option>
-                      <option value="alphatalk">AlphaTALK — Content Creation</option>
+                      <option value="alphadata">AlphaDATA: Data Solutions</option>
+                      <option value="alphatalk">AlphaTALK: Content Creation</option>
                       <option value="partnership">Partnership</option>
                       <option value="investment">Investment / Collaboration</option>
                       <option value="other">Other</option>

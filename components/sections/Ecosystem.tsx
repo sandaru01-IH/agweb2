@@ -11,7 +11,7 @@ const companies = [
     name: 'AlphaDATA',
     tagline: 'Intelligence Through Data',
     description:
-      'End-to-end data solutions — from spatial analysis and GIS to advanced data science, visualization, and engineering pipelines that turn raw data into a competitive edge.',
+      'End-to-end data solutions covering spatial analysis, GIS, advanced data science, visualization, and engineering pipelines that turn raw data into a competitive edge.',
     capabilities: ['Spatial & GIS Analysis', 'Data Science', 'Data Visualization', 'Data Engineering', 'Analytics & BI'],
     icon: Database,
     href: '#alphadata',
@@ -22,7 +22,7 @@ const companies = [
     name: 'AlphaTALK',
     tagline: 'Stories That Move Markets',
     description:
-      'Premium content creation and brand storytelling focused on Sri Lankan businesses and the moments that define culture — where strategy meets creative execution.',
+      'Premium content creation and brand storytelling focused on Sri Lankan businesses and the moments that define culture, where strategy meets creative execution.',
     capabilities: ['Content Strategy', 'Video Production', 'Social Media', 'Brand Storytelling', 'Sri Lankan Market'],
     icon: Mic,
     href: '#alphatalk',
@@ -72,7 +72,7 @@ export default function Ecosystem() {
             transition={{ duration: 0.6, delay: 0.25 }}
             className="text-white/35 max-w-xs leading-relaxed text-sm lg:text-right"
           >
-            Each company is designed to be a category leader — focused, resourced, and built for scale.
+            Each company is designed to be a category leader. Focused, resourced, and built for scale.
           </motion.p>
         </div>
 

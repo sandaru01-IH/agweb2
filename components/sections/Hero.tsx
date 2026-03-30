@@ -383,7 +383,7 @@ export default function Hero() {
             className="text-white/50 mb-10 max-w-lg leading-relaxed"
             style={{ fontSize: 'clamp(1rem, 1.8vw, 1.15rem)' }}>
             AlphaGRID is a multi-brand holding company building category-defining
-            ventures — from data intelligence to creative content and beyond.
+            ventures, from data intelligence to creative content and beyond.
           </motion.p>
 
           <motion.div initial="hidden" animate="visible" custom={0.78} variants={fadeUp}

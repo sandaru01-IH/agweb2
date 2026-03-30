@@ -173,8 +173,8 @@ export default function AlphaData() {
               style={{ backgroundColor: 'rgba(245,197,24,0.06)', border: '1px solid rgba(245,197,24,0.15)' }}
             >
               <p className="text-ink-600 text-sm leading-relaxed">
-                <span className="font-semibold text-ink-800">Specialized in Sri Lanka&apos;s growing data economy</span>
-                {' '}— providing enterprise-grade spatial and data solutions to government, NGOs, and private sector clients.
+                <span className="font-semibold text-ink-800">Specialized in Sri Lanka&apos;s growing data economy.</span>
+                {' '}Providing enterprise-grade spatial and data solutions to government, NGOs, and private sector clients.
               </p>
             </motion.div>
           </div>

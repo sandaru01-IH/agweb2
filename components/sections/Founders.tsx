@@ -9,7 +9,7 @@ const founders = [
     name: 'Sandaruwan Sankalpa',
     role: 'Co-Founder',
     focus: 'Data & Technology',
-    bio: 'Visionary technologist and data specialist driving AlphaGRID\'s data intelligence arm. Sandaruwan brings deep expertise in GIS, spatial analysis, and data science — translating complex data into meaningful decisions for clients across industries.',
+    bio: 'Visionary technologist and data specialist driving AlphaGRID\'s data intelligence arm. Sandaruwan brings deep expertise in GIS, spatial analysis, and data science, translating complex data into meaningful decisions for clients across industries.',
     expertise: ['Data Science', 'GIS & Spatial', 'Technology Strategy'],
     photo: '/founders/sandaruwan.jpg',
     initial: 'S',
@@ -19,7 +19,7 @@ const founders = [
     name: 'Samith Madushanka',
     role: 'Co-Founder',
     focus: 'Operations & Growth',
-    bio: 'Strategic operator and business builder with a sharp eye for growth opportunities. Samith leads AlphaGRID\'s operational excellence and drives the expansion of ventures — building on a foundation of strong business acumen and leadership.',
+    bio: 'Strategic operator and business builder with a sharp eye for growth opportunities. Samith leads AlphaGRID\'s operational excellence and drives the expansion of ventures, building on a foundation of strong business acumen and leadership.',
     expertise: ['Business Strategy', 'Operations', 'Brand Development'],
     photo: '/founders/samith.jpg',
     initial: 'S',
@@ -63,8 +63,8 @@ export default function Founders() {
             className="text-ink-400 max-w-lg mt-4 leading-relaxed"
             style={{ fontSize: '1.05rem' }}
           >
-            Two complementary forces — one built on data, one on strategy — driving
-            a holding company with the ambition to reshape industries.
+            Two complementary forces. One built on data, one on strategy,
+            driving a holding company with the ambition to reshape industries.
           </motion.p>
         </div>
 
@@ -188,10 +188,10 @@ export default function Founders() {
                 }}
               >
                 We didn&apos;t build AlphaGRID to run a company.
-                We built it to build an ecosystem — one where every venture
+                We built it to build an ecosystem where every venture
                 we create raises the standard of the industries we enter.
               </p>
-              <p className="text-white/35 text-sm font-medium">— Sandaruwan &amp; Samith, Co-Founders</p>
+              <p className="text-white/35 text-sm font-medium">Sandaruwan &amp; Samith, Co-Founders</p>
             </div>
           </div>
         </motion.div>

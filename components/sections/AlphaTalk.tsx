@@ -8,7 +8,7 @@ const services = [
   {
     icon: <Video size={20} />,
     title: 'Video Production',
-    description: 'High-impact video content — from corporate profiles to short-form social content that stops the scroll.',
+    description: 'High-impact video content, from corporate profiles to short-form social content that stops the scroll.',
   },
   {
     icon: <Megaphone size={20} />,
@@ -172,7 +172,7 @@ export default function AlphaTalk() {
               style={{ maxWidth: '380px' }}
             >
               In a market saturated with noise, we help brands find their authentic
-              voice — building loyal audiences through content that educates,
+              voice, building loyal audiences through content that educates,
               entertains, and inspires.
             </motion.p>
 
