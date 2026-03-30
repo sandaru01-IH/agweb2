@@ -78,7 +78,7 @@ export default function Footer() {
                 <Facebook size={15} />
               </a>
               <a
-                href="mailto:hello@alphagridglobal.com"
+                href="mailto:alphagrid.official@gmail.com"
                 className="w-9 h-9 rounded-md border border-white/[0.1] flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 transition-all"
               >
                 <Mail size={15} />

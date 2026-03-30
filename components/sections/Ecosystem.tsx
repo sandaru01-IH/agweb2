@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { ArrowRight, Database, Mic, Plus } from 'lucide-react'
+import { ArrowRight, Database, Mic } from 'lucide-react'
 
 const companies = [
   {
@@ -14,7 +14,6 @@ const companies = [
     description:
       'End-to-end data solutions — from spatial analysis and GIS to advanced data science, visualization, and engineering pipelines.',
     capabilities: ['Spatial & GIS Analysis', 'Data Science', 'Data Visualization', 'Data Engineering', 'Analytics & BI'],
-    color: '#F5C518',
     href: '#alphadata',
   },
   {
@@ -26,20 +25,7 @@ const companies = [
     description:
       'Premium content creation and brand storytelling focused on Sri Lankan businesses and the moments that define culture.',
     capabilities: ['Content Strategy', 'Video Production', 'Social Media', 'Brand Storytelling', 'Sri Lankan Market'],
-    color: '#ffffff',
     href: '#alphatalk',
-  },
-  {
-    id: 'future',
-    name: 'More Coming',
-    status: 'Upcoming',
-    icon: <Plus size={22} />,
-    tagline: 'The Ecosystem Expands',
-    description:
-      'We are building into new sectors — cafés, restaurants, fashion, and more. The AlphaGRID universe is just getting started.',
-    capabilities: ['Café & F&B', 'Fashion & Lifestyle', 'Retail & Experience', 'Hospitality', 'And More...'],
-    color: '#525252',
-    href: '#vision',
   },
 ]
 
@@ -104,8 +90,8 @@ export default function Ecosystem() {
           </motion.p>
         </div>
 
-        {/* Company Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {/* Company Cards — centered two-column */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl">
           {companies.map((company, i) => (
             <motion.div
               key={company.id}
@@ -113,36 +99,18 @@ export default function Ecosystem() {
               initial="hidden"
               animate={isInView ? 'visible' : 'hidden'}
               variants={cardVariants}
-              className={`group relative rounded-lg border p-8 card-hover cursor-pointer flex flex-col ${
-                company.id === 'future'
-                  ? 'border-white/[0.08] bg-white/[0.02]'
-                  : 'border-white/[0.1] bg-white/[0.04] hover:border-yellow-500/40'
-              }`}
+              className="group relative rounded-lg border border-white/[0.1] bg-white/[0.04] hover:border-yellow-500/40 p-8 card-hover cursor-pointer flex flex-col"
               onClick={() => scrollTo(company.href)}
             >
-              {/* Status badge */}
+              {/* Status + icon */}
               <div className="flex items-center justify-between mb-6">
                 <div
                   className="w-10 h-10 rounded-md flex items-center justify-center"
-                  style={{
-                    backgroundColor:
-                      company.id === 'future'
-                        ? 'rgba(255,255,255,0.06)'
-                        : 'rgba(245,197,24,0.12)',
-                    color: company.id === 'future' ? '#525252' : '#F5C518',
-                  }}
+                  style={{ backgroundColor: 'rgba(245,197,24,0.12)', color: '#F5C518' }}
                 >
                   {company.icon}
                 </div>
-                <span
-                  className={`label-sm ${
-                    company.status === 'Active'
-                      ? 'text-yellow-500'
-                      : 'text-white/25'
-                  }`}
-                >
-                  {company.status === 'Active' ? '● Active' : '○ Upcoming'}
-                </span>
+                <span className="label-sm text-yellow-500">● Active</span>
               </div>
 
               {/* Name & Tagline */}
@@ -173,14 +141,8 @@ export default function Ecosystem() {
                     key={cap}
                     className="text-xs px-2.5 py-1 rounded-sm border"
                     style={{
-                      borderColor:
-                        company.id === 'future'
-                          ? 'rgba(255,255,255,0.06)'
-                          : 'rgba(245,197,24,0.15)',
-                      color:
-                        company.id === 'future'
-                          ? 'rgba(255,255,255,0.2)'
-                          : 'rgba(245,197,24,0.7)',
+                      borderColor: 'rgba(245,197,24,0.15)',
+                      color: 'rgba(245,197,24,0.7)',
                     }}
                   >
                     {cap}
@@ -189,28 +151,25 @@ export default function Ecosystem() {
               </div>
 
               {/* CTA */}
-              {company.id !== 'future' && (
-                <div className="flex items-center gap-2 text-white/30 text-sm group-hover:text-yellow-500 transition-colors">
-                  <span className="text-xs font-medium uppercase tracking-wider">Learn more</span>
-                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                </div>
-              )}
+              <div className="flex items-center gap-2 text-white/30 text-sm group-hover:text-yellow-500 transition-colors">
+                <span className="text-xs font-medium uppercase tracking-wider">Learn more</span>
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Bottom stat strip */}
+        {/* Stat strip */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-16 pt-10 border-t border-white/[0.06] grid grid-cols-2 md:grid-cols-4 gap-8"
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-16 pt-10 border-t border-white/[0.06] grid grid-cols-2 md:grid-cols-3 gap-8 max-w-2xl"
         >
           {[
             { value: '2', label: 'Active Companies' },
             { value: '2', label: 'Visionary Founders' },
-            { value: '∞', label: 'Sectors Ahead' },
-            { value: '2024', label: 'Founded' },
+            { value: '2025', label: 'Founded' },
           ].map((stat) => (
             <div key={stat.label}>
               <div

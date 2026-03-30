@@ -19,7 +19,7 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false)
   const [copied, setCopied] = useState(false)
 
-  const email = 'hello@alphagridglobal.com'
+  const email = 'alphagrid.official@gmail.com'
 
   const handleCopy = async () => {
     try {
