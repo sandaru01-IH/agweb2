@@ -6,37 +6,28 @@ import { ArrowRight, Database, Mic } from 'lucide-react'
 
 const companies = [
   {
+    index: '01',
     id: 'alphadata',
     name: 'AlphaDATA',
-    status: 'Active',
-    icon: <Database size={22} />,
     tagline: 'Intelligence Through Data',
     description:
-      'End-to-end data solutions — from spatial analysis and GIS to advanced data science, visualization, and engineering pipelines.',
+      'End-to-end data solutions — from spatial analysis and GIS to advanced data science, visualization, and engineering pipelines that turn raw data into a competitive edge.',
     capabilities: ['Spatial & GIS Analysis', 'Data Science', 'Data Visualization', 'Data Engineering', 'Analytics & BI'],
+    icon: Database,
     href: '#alphadata',
   },
   {
+    index: '02',
     id: 'alphatalk',
     name: 'AlphaTALK',
-    status: 'Active',
-    icon: <Mic size={22} />,
     tagline: 'Stories That Move Markets',
     description:
-      'Premium content creation and brand storytelling focused on Sri Lankan businesses and the moments that define culture.',
+      'Premium content creation and brand storytelling focused on Sri Lankan businesses and the moments that define culture — where strategy meets creative execution.',
     capabilities: ['Content Strategy', 'Video Production', 'Social Media', 'Brand Storytelling', 'Sri Lankan Market'],
+    icon: Mic,
     href: '#alphatalk',
   },
 ]
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] },
-  }),
-}
 
 export default function Ecosystem() {
   const ref = useRef(null)
@@ -50,147 +41,140 @@ export default function Ecosystem() {
   return (
     <section id="ecosystem" className="relative bg-ink-950 overflow-hidden">
       <div className="absolute inset-0 bg-grid-dark pointer-events-none" />
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse 60% 40% at 50% 80%, rgba(245,197,24,0.04) 0%, transparent 70%)',
-        }}
-      />
 
       <div className="container-custom section-py relative z-10">
-        {/* Header */}
-        <div ref={ref} className="mb-16 lg:mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="mb-4"
-          >
-            <span className="tag-outline-dark">The AlphaGRID Ecosystem</span>
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-white display-lg max-w-2xl"
-          >
-            Built to lead{' '}
-            <span style={{ color: '#F5C518' }}>every sector</span>{' '}
-            we enter.
-          </motion.h2>
+
+        {/* ── Section header ── */}
+        <div ref={ref} className="mb-16 lg:mb-20 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.55 }}
+              className="mb-4"
+            >
+              <span className="tag-outline-dark">The AlphaGRID Ecosystem</span>
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 28 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-white display-lg max-w-xl"
+            >
+              Built to lead every{' '}
+              <span style={{ color: '#F5C518' }}>sector</span>{' '}
+              we enter.
+            </motion.h2>
+          </div>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-white/40 max-w-xl mt-4 leading-relaxed"
-            style={{ fontSize: '1.05rem' }}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.25 }}
+            className="text-white/35 max-w-xs leading-relaxed text-sm lg:text-right"
           >
-            Each company under AlphaGRID is designed to be a category leader —
-            focused, resourced, and built for scale.
+            Each company is designed to be a category leader — focused, resourced, and built for scale.
           </motion.p>
         </div>
 
-        {/* Company Cards — centered two-column */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl">
-          {companies.map((company, i) => (
-            <motion.div
-              key={company.id}
-              custom={i}
-              initial="hidden"
-              animate={isInView ? 'visible' : 'hidden'}
-              variants={cardVariants}
-              className="group relative rounded-lg border border-white/[0.1] bg-white/[0.04] hover:border-yellow-500/40 p-8 card-hover cursor-pointer flex flex-col"
-              onClick={() => scrollTo(company.href)}
-            >
-              {/* Status + icon */}
-              <div className="flex items-center justify-between mb-6">
-                <div
-                  className="w-10 h-10 rounded-md flex items-center justify-center"
-                  style={{ backgroundColor: 'rgba(245,197,24,0.12)', color: '#F5C518' }}
-                >
-                  {company.icon}
-                </div>
-                <span className="label-sm text-yellow-500">● Active</span>
-              </div>
-
-              {/* Name & Tagline */}
-              <h3
-                className="text-white mb-2"
-                style={{
-                  fontFamily: 'var(--font-bricolage), system-ui, sans-serif',
-                  fontSize: '1.5rem',
-                  fontWeight: 700,
-                  letterSpacing: '-0.02em',
-                }}
+        {/* ── Company rows ── */}
+        <div className="flex flex-col">
+          {companies.map((company, i) => {
+            const Icon = company.icon
+            return (
+              <motion.div
+                key={company.id}
+                initial={{ opacity: 0, y: 36 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.7, delay: i * 0.14 + 0.2, ease: [0.16, 1, 0.3, 1] }}
               >
-                {company.name}
-              </h3>
-              <p className="text-white/35 text-xs font-medium uppercase tracking-widest mb-4">
-                {company.tagline}
-              </p>
+                {/* Top divider */}
+                <div className="h-px bg-white/[0.07]" />
 
-              {/* Description */}
-              <p className="text-white/55 text-sm leading-relaxed mb-6 flex-1">
-                {company.description}
-              </p>
+                <div
+                  className="group py-10 lg:py-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 cursor-pointer"
+                  onClick={() => scrollTo(company.href)}
+                >
+                  {/* Index + icon — col 1-2 */}
+                  <div className="lg:col-span-2 flex lg:flex-col items-center lg:items-start gap-4 lg:gap-3">
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-bricolage)',
+                        fontSize: '0.7rem',
+                        fontWeight: 700,
+                        letterSpacing: '0.18em',
+                        color: 'rgba(245,197,24,0.45)',
+                      }}
+                    >
+                      {company.index}
+                    </span>
+                    <div
+                      className="w-10 h-10 rounded-md flex items-center justify-center group-hover:bg-yellow-500/20 transition-colors duration-300"
+                      style={{ backgroundColor: 'rgba(245,197,24,0.08)', color: '#F5C518' }}
+                    >
+                      <Icon size={19} />
+                    </div>
+                    {/* Active dot */}
+                    <div className="flex items-center gap-1.5 lg:mt-auto">
+                      <div className="w-1.5 h-1.5 rounded-full bg-yellow-500" />
+                      <span className="label-sm text-yellow-500/70">Active</span>
+                    </div>
+                  </div>
 
-              {/* Capabilities */}
-              <div className="flex flex-wrap gap-2 mb-6">
-                {company.capabilities.map((cap) => (
-                  <span
-                    key={cap}
-                    className="text-xs px-2.5 py-1 rounded-sm border"
-                    style={{
-                      borderColor: 'rgba(245,197,24,0.15)',
-                      color: 'rgba(245,197,24,0.7)',
-                    }}
-                  >
-                    {cap}
-                  </span>
-                ))}
-              </div>
+                  {/* Name + description — col 3-8 */}
+                  <div className="lg:col-span-6">
+                    <h3
+                      className="text-white mb-1 group-hover:text-yellow-400 transition-colors duration-300"
+                      style={{
+                        fontFamily: 'var(--font-bricolage)',
+                        fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)',
+                        fontWeight: 800,
+                        letterSpacing: '-0.03em',
+                        lineHeight: 1,
+                      }}
+                    >
+                      {company.name}
+                    </h3>
+                    <p className="text-white/30 text-xs font-semibold uppercase tracking-widest mb-5">
+                      {company.tagline}
+                    </p>
+                    <p className="text-white/50 text-sm leading-relaxed max-w-md">
+                      {company.description}
+                    </p>
+                  </div>
 
-              {/* CTA */}
-              <div className="flex items-center gap-2 text-white/30 text-sm group-hover:text-yellow-500 transition-colors">
-                <span className="text-xs font-medium uppercase tracking-wider">Learn more</span>
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-              </div>
-            </motion.div>
-          ))}
+                  {/* Tags + CTA — col 9-12 */}
+                  <div className="lg:col-span-4 flex flex-col justify-between gap-6">
+                    <div className="flex flex-wrap gap-2">
+                      {company.capabilities.map((cap) => (
+                        <span
+                          key={cap}
+                          className="text-xs px-2.5 py-1 rounded-sm border"
+                          style={{
+                            borderColor: 'rgba(245,197,24,0.14)',
+                            color: 'rgba(245,197,24,0.6)',
+                          }}
+                        >
+                          {cap}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center gap-2 group-hover:text-yellow-500 text-white/25 transition-colors duration-300 self-start">
+                      <span className="text-xs font-semibold uppercase tracking-wider">Explore</span>
+                      <ArrowRight
+                        size={14}
+                        className="group-hover:translate-x-1.5 transition-transform duration-300"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )
+          })}
+          {/* Bottom divider */}
+          <div className="h-px bg-white/[0.07]" />
         </div>
 
-        {/* Stat strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-16 pt-10 border-t border-white/[0.06] grid grid-cols-2 md:grid-cols-3 gap-8 max-w-2xl"
-        >
-          {[
-            { value: '2', label: 'Active Companies' },
-            { value: '2', label: 'Visionary Founders' },
-            { value: '2025', label: 'Founded' },
-          ].map((stat) => (
-            <div key={stat.label}>
-              <div
-                className="text-white mb-1"
-                style={{
-                  fontFamily: 'var(--font-bricolage), system-ui, sans-serif',
-                  fontSize: '2.5rem',
-                  fontWeight: 800,
-                  letterSpacing: '-0.04em',
-                  lineHeight: 1,
-                  color: '#F5C518',
-                }}
-              >
-                {stat.value}
-              </div>
-              <div className="text-white/35 text-xs font-medium uppercase tracking-widest">
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </motion.div>
       </div>
     </section>
   )

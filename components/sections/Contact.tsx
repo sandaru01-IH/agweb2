@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Mail, Send, ArrowRight, Copy, Check } from 'lucide-react'
+import { Mail, Send, Phone, Copy, Check } from 'lucide-react'
 
 export default function Contact() {
   const ref = useRef(null)
@@ -106,6 +106,23 @@ export default function Contact() {
                   <Copy size={14} className="text-ink-300 group-hover:text-ink-600 transition-colors" />
                 )}
               </button>
+            </div>
+
+            {/* Phone */}
+            <div className="mb-8">
+              <p className="label-sm text-ink-300 mb-3">Phone / WhatsApp</p>
+              <a
+                href="tel:+94701475747"
+                className="group flex items-center gap-3 w-full p-4 rounded-lg border border-ink-100 bg-white hover:border-yellow-500/40 transition-all duration-300 no-underline"
+              >
+                <Phone size={16} className="text-ink-400 group-hover:text-yellow-600 transition-colors flex-shrink-0" />
+                <span
+                  className="text-ink-700 font-medium text-sm"
+                  style={{ fontFamily: 'var(--font-dm-sans)', letterSpacing: '0.02em' }}
+                >
+                  +94 70 147 5747
+                </span>
+              </a>
             </div>
 
             {/* What we can help with */}

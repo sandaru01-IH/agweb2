@@ -7,7 +7,7 @@ import Image from 'next/image'
 const founders = [
   {
     name: 'Sandaruwan Sankalpa',
-    role: 'Co-Founder & CEO',
+    role: 'Co-Founder',
     focus: 'Data & Technology',
     bio: 'Visionary technologist and data specialist driving AlphaGRID\'s data intelligence arm. Sandaruwan brings deep expertise in GIS, spatial analysis, and data science — translating complex data into meaningful decisions for clients across industries.',
     expertise: ['Data Science', 'GIS & Spatial', 'Technology Strategy'],
@@ -17,7 +17,7 @@ const founders = [
   },
   {
     name: 'Samith Madushanka',
-    role: 'Co-Founder & COO',
+    role: 'Co-Founder',
     focus: 'Operations & Growth',
     bio: 'Strategic operator and business builder with a sharp eye for growth opportunities. Samith leads AlphaGRID\'s operational excellence and drives the expansion of ventures — building on a foundation of strong business acumen and leadership.',
     expertise: ['Business Strategy', 'Operations', 'Brand Development'],
